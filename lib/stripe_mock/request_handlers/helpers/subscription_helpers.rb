@@ -37,10 +37,11 @@ module StripeMock
         start_time = options[:current_period_start] || now
         params = { customer: cus[:id], current_period_start: start_time, created: created_time }
         params.merge!({ :plan => (plans.size == 1 ? plans.first : nil) })
-        keys_to_merge = /application_fee_percent|quantity|metadata|tax_percent|billing|days_until_due|default_tax_rates|pending_invoice_item_interval|default_payment_method|collection_method|cancel_at/
+        keys_to_merge = /application_fee_percent|quantity|metadata|tax_percent|billing|days_until_due|default_tax_rates|pending_invoice_item_interval|default_payment_method|collection_method/
         params.merge! options.select {|k,v| k =~ keys_to_merge}
 
         params[:collection_method] = options[:collection_method] || 'charge_automatically'
+        params[:cancel_at] = options[:cancel_at] || nil
         params[:pause_collection] = options[:pause_collection] || {}
 
         if options[:cancel_at_period_end] == true
