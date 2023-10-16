@@ -323,6 +323,7 @@ module StripeMock
         return if customer[:invoice_settings][:default_payment_method]
         return if customer[:trial_end]
         return if params[:trial_end]
+        return if params.dig(:trial_settings, :end_behavior)
         return if params[:payment_behavior] == 'default_incomplete'
         return if subscription[:default_payment_method]
 
