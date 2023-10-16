@@ -97,7 +97,7 @@ module StripeMock
           customer[:default_source] = new_card[:id]
         end
 
-        allowed_params = %w(customer application_fee_percent coupon items metadata plan quantity source tax_percent trial_end trial_period_days current_period_start created prorate billing_cycle_anchor billing days_until_due idempotency_key enable_incomplete_payments cancel_at_period_end default_tax_rates payment_behavior pending_invoice_item_interval default_payment_method collection_method off_session trial_from_plan proration_behavior backdate_start_date transfer_data expand automatic_tax cancel_at)
+        allowed_params = %w(application_fee_percent automatic_tax backdate_start_date billing billing_cycle_anchor cancel_at cancel_at_period_end collection_method coupon created current_period_start customer days_until_due default_payment_method default_tax_rates enable_incomplete_payments expand id idempotency_key items metadata off_session payment_behavior payment_settings pending_invoice_item_interval plan prorate proration_behavior quantity source tax_percent transfer_data trial_end trial_from_plan trial_period_days trial_settings)
         unknown_params = params.keys - allowed_params.map(&:to_sym)
         if unknown_params.length > 0
           raise Stripe::InvalidRequestError.new("Received unknown parameter: #{unknown_params.join}", unknown_params.first.to_s, http_status: 400)
